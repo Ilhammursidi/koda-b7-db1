@@ -60,12 +60,15 @@ erDiagram
     }
 
     USER ||--|{ PRODUCT : buy
+    USER ||--|| ORDER : see
+    USER ||--|{ IN_DELIVERY : check
 
     USER {
         int user_id
         string username
         string fullname
         string phone
+        string selected_product
     }
 
     PRODUCT ||--|{ ORDER : make
