@@ -25,23 +25,23 @@ erDiagram
     }
     BOOKSHELF ||--|{ BOOK : keep
 
-    OFFICER {
+    LIBRARIAN {
         int Id
-        string Officer_name
+        string librarian_name
     }
 
-    OFFICER ||--|{ BORROWING : handle
+    LIBRARIAN ||--|{ BOOK_LENDING : handle
+    BOOK ||--o{ BOOK_LENDING : "lend via"
 
-    BORROWING {
+    BOOK_LENDING {
         int id 
         string book_title
         string Borrower_name
         timestamp Borrowing_date
         timestamp Return_date
-        string officer_name
+        string librarian_name
     }
 
-    OFFICER ||--|{ BOOK : manage
 
 ```
 
@@ -59,57 +59,52 @@ erDiagram
         int stock
     }
 
-    USER ||--|{ PRODUCT : buy
-    USER ||--|| ORDER : see
-    USER ||--|{ IN_DELIVERY : check
 
     USER {
         int user_id
         string username
         string fullname
         string phone
-        string selected_product
     }
 
-    PRODUCT ||--|{ ORDER : make
 
     ORDER {
         int order_id
-        string product_title
+        int user_id
+        int product_id
         int order_stock
+        int product_price
+        int total_price
         string delivery_method
         string payment_method
-        int user_id
+        string indelivery
     }
 
-    ORDER ||--|{ DELIVERY : choose
 
     PAYMENT {
         int payment_id
-        string payment_mthod    
+        int order_id
+        int user_id
         int user_pin
         int delivery_price
         int total_payment
     }
 
-    DELIVERY ||--|{ PAYMENT : choose
 
     DELIVERY {
         int delivery_id
-        string delivery_name
+        int order_id
         string delivery_method
         int service_price
     }
 
-    PAYMENT ||--|| IN_DELIVERY : checkout
+    USER ||--o{ ORDER : make
+    PRODUCT ||--o{ ORDER : "ordered in"
+    ORDER ||--|| DELIVERY : "sent via"
+    ORDER ||--|| PAYMENT : "paid via"
+    USER ||--o{ PAYMENT : do
 
-    IN_DELIVERY {
-        int product_id
-        string product_title
-        string payment_method
-        string delivery_method
-        int order_stock
-        timestamp estimated_arrival
-    }
+
+
 
 ```
