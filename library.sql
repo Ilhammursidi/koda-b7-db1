@@ -6,11 +6,11 @@ CREATE TABLE category (
 CREATE TABLE bookshelf (
     id SERIAL PRIMARY KEY,
     rack_number INT UNIQUE NOT NULL
-);    
+);
 
 CREATE TABLE librarian (
     id SERIAl PRIMARY KEY,
-    librarian_name VARCHAR(100) NOT NULL
+    librarian_name VARCHAR(100) UNIQUE NOT NULL
 );   
 
 CREATE TABLE borrower (
@@ -43,7 +43,7 @@ CREATE TABLE book_lending (
 INSERT INTO category (category_name) VALUES 
 ('Fiksi Sastra'),('Romansa'),('Fantasi'),('Thriller'),('Self-Improvement');
 
-INSERT INTO bookshelf (rack_number) VALUES (1),(2);
+INSERT INTO bookshelf (rack_number) VALUES (1),(2),(3),(4),(5)
 
 INSERT INTO librarian (librarian_name) VALUES ('Siti'),('Budi');
 
